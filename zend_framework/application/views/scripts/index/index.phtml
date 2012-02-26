@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script type="text/javascript" src="/js/revenge_of_ajax.js"></script>
+	<script type="text/javascript" src="/js/roa_test_suite.js"></script>
+	<title>Revenge of Ajax test suite</title>
+</head>
+<body>
+	<h1>Revenge of Ajax test suite (for Zend Framework)</h1>
+	<h2>Test sensible ajax calls</h2>
+	<p>All of the following tests should alert the returned response</p>
+	<ul>
+		<li><button type="button" onclick="getTextFromAjaxController();">Test getting <em>text/html</em> from Ajax controller</button></li>
+		<li><button type="button" onclick="getJsonFromAjaxController();">Test getting <em>json</em> from Ajax controller</button></li>
+		<li><button type="button" onclick="getXmlFromAjaxController();">Test getting <em>xml</em> from Ajax controller</button></li>
+		<li>---</li>
+		<li><button type="button" onclick="getTextFromSomeotherController();">Test getting <em>text/html</em> from Someother controller</button></li>
+		<li><button type="button" onclick="getTextFromSomeotherControllerCamelCasedAction();">Test getting <em>text/html</em> from Someother controller with a camelCasedActionName</button></li>
+		<li>---</li>
+		<li><button type="button" onclick="getTextFromAjaxControllerUserParms();">Test getting <em>text/html</em> <strong>and</strong> working with user parms from Ajax controller</button></li>
+		<li><button type="button" onclick="getXmlFromAjaxControllerDodgy();">Test getting <em>xml</em> containing an &lt;ajaxerror&gt; tag from Ajax controller</button></li>
+		<li>---</li>
+		<li><button type="button" onclick="postToAjaxController();">Test <em>POSTing</em> to Ajax controller</button></li>
+	</ul>
+	<h2>Test probably erroneous ajax calls</h2>
+	<ul>
+		<li><button type="button" onclick="getTextAsJsonFromAjaxController();">Test getting <em>text/html</em> from Ajax controller but specifying <em>format=json</em></button>
+		Works but simply returns the default view for the specified text/html action
+		</li>
+		<li><button type="button" onclick="getTextAsXmlFromAjaxController();">Test getting <em>text/html</em> from Ajax controller but specifying <em>format=xml</em></button>
+		JavaScript error because the default view for the specified text/html action is dutifully returned, but
+		our ajax engine tries to handle it as XML</li>
+		<li>---</li>
+		<li><button type="button" onclick="getJsonAsTextFromAjaxController();">Test getting <em>json</em> from Ajax controller but specifying <em>format=text/html</em></button>
+		Does not work (because, interestingly, the request results in a 500 internal server error!)</li>
+		<li><button type="button" onclick="getJsonAsXmlFromAjaxController();">Test getting <em>json</em> from Ajax controller but specifying <em>format=xml</em></button>
+		JavaScript error because the default (ie. html) view for the specified json action is dutifully returned, but
+		our ajax engine tries to handle it as XML
+		</li>
+		<li>---</li>
+		<li><button type="button" onclick="getXmlAsTextFromAjaxController();">Test getting <em>xml</em> from Ajax controller but specifying <em>format=text/html</em></button>
+		Does not work (because, interestingly, the request results in a 500 internal server error!)</li>
+		<li><button type="button" onclick="getXmlAsJsonFromAjaxController();">Test getting <em>xml</em> from Ajax controller but specifying <em>format=json</em></button>
+		Works but simply returns the default (ie. html) view for the specified xml action</li>
+		<li>---</li>
+		<li><button type="button" onclick="getTextWithLayoutFromAjaxController();">Test getting <em>text/html</em> from Ajax controller but with layouting enabled</button>
+		Works but returns the view for the specified action <strong>sandwiched</strong> into your layout!
+		</li>
+	</ul>
+	<h2>Test URL hacking security</h2>
+	<ul>
+		<li>Go to <a href="/ajax/gettext">/ajax/gettext</a> (HTTP 200 success but white screen of death)</li>
+		<li>Go to <a href="/ajax/getxml?format=xml">/ajax/getxml?format=xml</a> (HTTP 200 success but white screen of death)</li>
+		<li>Go to <a href="/ajax/getxml/format/json">/ajax/getxml/format/json</a> (HTTP 200 success but white screen of death)</li>
+		<li>---</li>
+		<li>Go to <a href="/someother/gettext">/someother/gettext</a> (returned view visible <strong>because</strong> we haven't done anything in the Someother controller to prevent URL hacking)</li>
+	</ul>
+</body>
+</html>
