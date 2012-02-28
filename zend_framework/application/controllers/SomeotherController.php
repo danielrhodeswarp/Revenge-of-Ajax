@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @package    Revenge of Ajax (https://github.com/danielrhodeswarp/Revenge-of-Ajax)
+ * @copyright  Copyright (c) 2012 Warp Asylum Ltd (UK).
+ * @license    see LICENCE file in source code root folder     New BSD License
+ */
+
 class SomeotherController extends Zend_Controller_Action
 {
 

@@ -57,7 +57,7 @@ function getXmlFromAjaxControllerReaction(responseXml)
 function getTextFromSomeotherController()
 {
 	//we can also give a format of 'text' (which means same as format of 'html')
-	a.jax({controller:'someother', action:'gettext', format:'text', reaction:getTextFromSomeotherControllerReaction, any_extra_parms:'can_be_passed', like_this:'and_so_on'});
+	a.jax({controller:'/someother_ajax_control.php', action:'gettext', format:'text', reaction:getTextFromSomeotherControllerReaction, any_extra_parms:'can_be_passed', like_this:'and_so_on'});
 
 }
 
@@ -73,8 +73,8 @@ function getTextFromSomeotherControllerReaction(responseText)
 //
 function getTextFromSomeotherControllerCamelCasedAction()
 {
-	//note the action URL name is all lower case with hyphens representing the case jumps
-	a.jax({controller:'someother', action:'get-text-but-action-is-camel-cased', format:'text', reaction:getTextFromSomeotherControllerCamelCasedActionReaction, any_extra_parms:'can_be_passed', like_this:'and_so_on'});
+	//
+	a.jax({controller:'/someother_ajax_control.php', action:'getTextButActionIsCamelCased', format:'text', reaction:getTextFromSomeotherControllerCamelCasedActionReaction, any_extra_parms:'can_be_passed', like_this:'and_so_on'});
 
 }
 
@@ -161,7 +161,8 @@ function getTextAsXmlFromAjaxController()
 //
 function getTextAsXmlFromAjaxControllerReaction(responseXml)
 {
-	alert(responseXml);	//for a debug
+	//alert(responseXml);	//for a debug
+	alert(responseXml + "\nSpecifically:\n" + xml_to_string(responseXml));	//for a debug
 }
 
 //
@@ -185,7 +186,8 @@ function getJsonAsXmlFromAjaxController()
 //
 function getJsonAsXmlFromAjaxControllerReaction(responseXml)
 {
-	alert(responseXml);	//for a debug
+	//alert(responseXml);	//for a debug
+	alert(responseXml + "\nSpecifically:\n" + xml_to_string(responseXml));	//for a debug
 }
 
 //
@@ -212,17 +214,7 @@ function getXmlAsJsonFromAjaxControllerReaction(responseJson)
 	alert(responseJson);	//for a debug
 }
 
-//
-function getTextWithLayoutFromAjaxController()
-{
-	a.jax({action:'gettextwithlayout', method:'GET', format:'text', reaction:getTextWithLayoutFromAjaxControllerReaction, any_extra_parms:'can_be_passed', like_this:'and_so_on'});
-}
 
-//
-function getTextWithLayoutFromAjaxControllerReaction(responseText)
-{
-	alert(responseText);	//for a debug
-}
 
 //----utility--------
 function xml_to_string(xml_node)	//got this from http://stackoverflow.com/questions/349250/how-to-display-xml-in-javascript

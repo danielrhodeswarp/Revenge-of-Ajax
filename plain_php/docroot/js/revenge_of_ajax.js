@@ -1,3 +1,9 @@
+/**
+ * @package    Revenge of Ajax (https://github.com/danielrhodeswarp/Revenge-of-Ajax)
+ * @copyright  Copyright (c) 2012 Warp Asylum Ltd (UK).
+ * @license    see LICENCE file in source code root folder     New BSD License
+ */
+ 
 //----*Should* be able to minify this file safely with the various
 //JavaScript minifiers that are out there----
 
@@ -52,8 +58,8 @@ var a =
 	method : 'GET',	//HTTP method. Mozilla recommend uppercase*
 	asynchronous : true,
 	format : 'html',	//'html' (or its alias 'text') or 'xml' or 'json'
-	//server : '/ajax_control.php',	//Ajax server (relative from client URL)
-	controller : 'ajax',	//the default ZF controller URL name.
+	controller : '/ajax_control.php',	//Ajax server (relative from client URL)
+	//controller : 'ajax',	//the default ZF controller URL name.
 							//you don't *have* to pass this parm if you're happy with having all your ajax actions in the one default controller
 		
 		//internal properties
@@ -98,7 +104,7 @@ var a =
 		}
 		else
 		{
-			a.controller = 'ajax';	//set default
+			a.controller = '/ajax_control.php';	//set default
 		}
 		
 		if(allParms['format'])
@@ -126,7 +132,7 @@ var a =
 		//if(allParms['action'])
 		//{
 			a.action = allParms['action'];
-			delete allParms['action'];	//not needed in allParms anymore
+			//delete allParms['action'];	//not needed in allParms anymore
 		//}
 		
 		a.reaction = allParms['reaction'];
@@ -199,12 +205,12 @@ var a =
 		{
 			//the third parameter is "asynchronous or not"
 			//a.ajaxContainers[counter].requestObject.open(a.method, a.server + '?' + queryString, a.asynchronous);
-			a.ajaxContainers[counter].requestObject.open(a.method, '/' + a.controller + '/' + a.action + '?' + queryString, a.asynchronous);
+			a.ajaxContainers[counter].requestObject.open(a.method, a.controller + '?' + queryString, a.asynchronous);
 			
 			//for a debug:
-			//alert(a.method + '::' + '/' + a.controller + '/' + a.action + '?' + queryString);
+			//alert(a.method + '::' + a.controller + '?' + queryString);
 			
-			//to trigger Zend Framework's $this->_request->isXmlHttpRequest()
+			//for our PHP "request coming from JavaScript or not" check
 			a.ajaxContainers[counter].requestObject.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			
 			a.ajaxContainers[counter].requestObject.send(null);
@@ -214,16 +220,16 @@ var a =
 		{
 			//the third parameter is "asynchronous or not"
 			//a.ajaxContainers[counter].requestObject.open(a.method, a.server, a.asynchronous);
-			a.ajaxContainers[counter].requestObject.open(a.method, '/' + a.controller + '/' + a.action, a.asynchronous);
+			a.ajaxContainers[counter].requestObject.open(a.method,  a.controller, a.asynchronous);
 			
 			//for a debug:
-			//alert(a.method + '::' + '/' + a.controller + '/' + a.action + '\n' + '[' + queryString + ']');
+			//alert(a.method + '::' + a.controller + '\n' + '[' + queryString + ']');
 			
 			a.ajaxContainers[counter].requestObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			//this.ajaxContainers[timestamp].requestObject.setRequestHeader('Content-length', queryString.length);
 			//this.ajaxContainers[timestamp].requestObject.setRequestHeader('Connection', 'close');
 			
-			//to trigger Zend Framework's $this->_request->isXmlHttpRequest()
+			//for our PHP "request coming from JavaScript or not" check
 			a.ajaxContainers[counter].requestObject.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			
 			a.ajaxContainers[counter].requestObject.send(queryString);
