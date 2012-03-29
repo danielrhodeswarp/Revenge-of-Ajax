@@ -1,3 +1,9 @@
+/**
+ * @package    Revenge of Ajax (https://github.com/danielrhodeswarp/Revenge-of-Ajax)
+ * @copyright  Copyright (c) 2012 Warp Asylum Ltd (UK).
+ * @license    see LICENCE file in source code root folder     New BSD License
+ */
+
 //----*Should* be able to minify this file safely with the various
 //JavaScript minifiers that are out there----
 
