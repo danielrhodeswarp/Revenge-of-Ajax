@@ -47,3 +47,7 @@ Set up the version you need as a vhost and you'll get the test page.
 * A call of a.jax({internal_settings:'value', ...}, {parameters_to_pass:someParameter, ...}); might look and feel better
 * Be careful not to use names of internal settings as parameter names of values to pass
 * It's controllable, but the *default* is for all of the ajax actions to go in the same controller. This may or may not be what you want.
+
+## TODO
+
+* jQuery support
