@@ -51,3 +51,4 @@ Set up the version you need as a vhost and you'll get the test page.
 ## TODO
 
 * jQuery support
+* support for in-place definition of callback function?
